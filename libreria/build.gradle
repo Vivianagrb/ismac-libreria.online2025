@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id "io.qameta.allure" version "2.11.2"
+}
+
+group = 'com.distribuida'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'ch.qos.logback:logback-classic:1.2.11' // o slf4j-simple si prefieres
+    testImplementation(platform('org.junit:junit-bom:5.10.0'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
+    testImplementation 'io.qameta.allure:allure-junit5:2.24.0'
+
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required.set(false)
+        csv.required.set(false)
+        html.required.set(true)
+        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+    }
+
+}
