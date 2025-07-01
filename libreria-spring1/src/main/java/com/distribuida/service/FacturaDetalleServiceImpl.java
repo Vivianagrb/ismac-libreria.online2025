@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 
-public abstract class FacturaDetalleServiceImpl implements FacturaDetalleService {
+public class FacturaDetalleServiceImpl implements FacturaDetalleService {
 
     @Autowired
     private FacturaDetalleRepository facturaDetalleRepository;

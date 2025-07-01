@@ -23,7 +23,7 @@ public class Categoria {
         this.descripcion = descripcion;
     }
 
-    public int getId_categoria() {
+    public Integer getId_categoria() {
         return id_categoria;
     }
 

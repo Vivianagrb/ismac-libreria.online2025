@@ -1,0 +1,95 @@
+package com.distribuida.controller;
+
+import com.distribuida.model.Autor;
+import com.distribuida.model.Cliente;
+import com.distribuida.service.AutorService;
+import com.distribuida.service.ClienteService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
+
+public class AutorControllerTestUnitaria {
+
+    @InjectMocks
+    private AutorController autorController;
+    @Mock
+    private AutorService autorService;
+    private Autor autor;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+
+        autor = new Autor();
+        autor.setId_autor(1);
+        autor.setNombre("ViviAutor");
+        autor.setApellido("Viteri");
+        autor.setPais("Ecuador");
+        autor.setDireccion("Marianas2");
+        autor.setTelefono("09876543");
+        autor.setCorreo("juan@gmail.com");
+
+    }
+
+    @Test
+    public void testFindAll() {
+        when(autorService.findAll()).thenReturn(List.of(autor));
+        ResponseEntity<List<Autor>> respuesta = autorController.findAll();
+        assertEquals(200, respuesta.getStatusCodeValue());
+        assertEquals(1, respuesta.getBody().size());
+        verify(autorService, times(1)).findAll();
+    }
+    @Test
+    public void testFindOneExiste() {
+        when(autorService.findOne(1)).thenReturn(autor);
+        ResponseEntity<Autor> respuesta = autorController.findOne(1);
+        assertEquals(200, respuesta.getStatusCodeValue());
+        assertEquals(autor.getNombre(), respuesta.getBody().getNombre());
+    }
+    @Test
+    public void testFindOneNoExistente() {
+        when(autorService.findOne(2)).thenReturn(null);
+        ResponseEntity<Autor> respuesta = autorController.findOne(2);
+        assertEquals(404, respuesta.getStatusCodeValue());
+    }
+    @Test
+    public void testSave() {
+        when(autorService.save(autor)).thenReturn(autor);
+        ResponseEntity<Autor> respuesta = autorController.save(autor);
+        assertEquals(200, respuesta.getStatusCodeValue());
+        assertEquals("ViviAutor",  respuesta.getBody().getNombre());
+    }
+    @Test
+    public void testUpdateExistente() {
+        when(autorService.update(1,autor)).thenReturn(autor);
+        ResponseEntity<Autor> respuesta = autorController.update(1,autor);
+        assertEquals(200, respuesta.getStatusCodeValue());
+    }
+
+    @Test
+    public void testUpdateNoExistente() {
+        when(autorService.update(eq(2), any(Autor.class))).thenReturn(null);
+        ResponseEntity<Autor> respuesta = autorController.update(2,autor);
+        assertEquals(200, respuesta.getStatusCodeValue());
+    }
+    @Test
+    public void testDelete() {
+        doNothing().when(autorService).delete(1);
+        ResponseEntity<Void> respuesta = autorController.delete(1);
+        assertEquals(204, respuesta.getStatusCodeValue());
+        verify(autorService, times(1)).delete(1);
+
+    }
+
+
+}

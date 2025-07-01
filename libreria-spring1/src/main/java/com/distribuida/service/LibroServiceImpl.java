@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public abstract class LibroServiceImpl implements LibroService {
+public  class LibroServiceImpl implements LibroService {
     @Autowired
     private LibroRepository libroRepository;
 

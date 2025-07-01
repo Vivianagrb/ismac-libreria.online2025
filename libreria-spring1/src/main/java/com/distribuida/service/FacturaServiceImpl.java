@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 
-public abstract class FacturaServiceImpl implements FacturaService {
+public class FacturaServiceImpl implements FacturaService {
 
     @Autowired
     private FacturaRepository facturaRepository;
