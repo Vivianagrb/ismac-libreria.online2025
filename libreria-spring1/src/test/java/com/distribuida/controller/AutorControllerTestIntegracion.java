@@ -24,44 +24,44 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class AutorControllerTestIntegracion {
 
-        @Autowired
-        private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-        @MockBean
-        private AutorService autorService;
+    @MockBean
+    private AutorService autorService;
 
-        @Autowired
-        private ObjectMapper objectMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-        @Test
-        public void testGetAutor() throws Exception {
-            Autor autor= new Autor(1,"VivianaAutor","Viteri","Ecuador","Marianas","09876543","juan@gmail.com");
-            Mockito.when(autorService.findAll()).thenReturn(List.of(autor));
-            mockMvc.perform(get("/api/autor"))
-                    .andExpect(status().isOk())
-                    .andExpect(jsonPath("$[0].nombre").value("VivianaAutor"));
-
-        }
-
-        @Test
-        public void testPostAutor() throws Exception {
-
-            Autor autor = new Autor(1,"VivianaAutor","Viteri","Ecuador","Marianas","09876543","juan@gmail.com");
-            Mockito.when(autorService.save(any(Autor.class))).thenReturn(autor);
-
-            mockMvc.perform(post("/api/autor")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper.writeValueAsString(autor)))
-                    .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.nombre").value("VivianaAutor"));
-        }
-
-        @Test
-        public void testDeleteAutor() throws Exception{
-            mockMvc.perform(delete("/api/autor/1"))
-                    .andExpect(status().isNoContent());
-        }
+    @Test
+    public void testGetAutor() throws Exception {
+        Autor autor = new Autor(1, "VivianaAutor", "Viteri", "Ecuador", "Marianas", "09876543", "juan@gmail.com");
+        Mockito.when(autorService.findAll()).thenReturn(List.of(autor));
+        mockMvc.perform(get("/api/autor"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].nombre").value("VivianaAutor"));
 
     }
+
+    @Test
+    public void testPostAutor() throws Exception {
+
+        Autor autor = new Autor(1, "VivianaAutor", "Viteri", "Ecuador", "Marianas", "09876543", "juan@gmail.com");
+        Mockito.when(autorService.save(any(Autor.class))).thenReturn(autor);
+
+        mockMvc.perform(post("/api/autor")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(autor)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nombre").value("VivianaAutor"));
+    }
+
+    @Test
+    public void testDeleteAutor() throws Exception {
+        mockMvc.perform(delete("/api/autor/1"))
+                .andExpect(status().isNoContent());
+    }
+
+}
 
 

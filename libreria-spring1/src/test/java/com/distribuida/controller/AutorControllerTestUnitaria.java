@@ -1,9 +1,7 @@
 package com.distribuida.controller;
 
 import com.distribuida.model.Autor;
-import com.distribuida.model.Cliente;
 import com.distribuida.service.AutorService;
-import com.distribuida.service.ClienteService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -49,6 +47,7 @@ public class AutorControllerTestUnitaria {
         assertEquals(1, respuesta.getBody().size());
         verify(autorService, times(1)).findAll();
     }
+
     @Test
     public void testFindOneExiste() {
         when(autorService.findOne(1)).thenReturn(autor);
@@ -56,40 +55,41 @@ public class AutorControllerTestUnitaria {
         assertEquals(200, respuesta.getStatusCodeValue());
         assertEquals(autor.getNombre(), respuesta.getBody().getNombre());
     }
+
     @Test
     public void testFindOneNoExistente() {
         when(autorService.findOne(2)).thenReturn(null);
         ResponseEntity<Autor> respuesta = autorController.findOne(2);
         assertEquals(404, respuesta.getStatusCodeValue());
     }
+
     @Test
     public void testSave() {
         when(autorService.save(autor)).thenReturn(autor);
         ResponseEntity<Autor> respuesta = autorController.save(autor);
         assertEquals(200, respuesta.getStatusCodeValue());
-        assertEquals("ViviAutor",  respuesta.getBody().getNombre());
+        assertEquals("ViviAutor", respuesta.getBody().getNombre());
     }
+
     @Test
     public void testUpdateExistente() {
-        when(autorService.update(1,autor)).thenReturn(autor);
-        ResponseEntity<Autor> respuesta = autorController.update(1,autor);
+        when(autorService.update(1, autor)).thenReturn(autor);
+        ResponseEntity<Autor> respuesta = autorController.update(1, autor);
         assertEquals(200, respuesta.getStatusCodeValue());
     }
 
     @Test
     public void testUpdateNoExistente() {
         when(autorService.update(eq(2), any(Autor.class))).thenReturn(null);
-        ResponseEntity<Autor> respuesta = autorController.update(2,autor);
+        ResponseEntity<Autor> respuesta = autorController.update(2, autor);
         assertEquals(200, respuesta.getStatusCodeValue());
     }
+
     @Test
     public void testDelete() {
         doNothing().when(autorService).delete(1);
         ResponseEntity<Void> respuesta = autorController.delete(1);
         assertEquals(204, respuesta.getStatusCodeValue());
         verify(autorService, times(1)).delete(1);
-
     }
-
-
 }

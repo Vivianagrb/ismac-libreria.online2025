@@ -28,7 +28,7 @@ public class CategoriaControllerTestUnitaria {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        categoria= new Categoria();
+        categoria = new Categoria();
         categoria.setId_categoria(2);
         categoria.setCategoria("Poesia2");
         categoria.setDescripcion("Romanticismo2");
@@ -43,6 +43,7 @@ public class CategoriaControllerTestUnitaria {
         assertEquals(1, respuesta.getBody().size());
         verify(categoriaService, times(1)).findAll();
     }
+
     @Test
     public void testFindOneExiste() {
         when(categoriaService.findOne(1)).thenReturn(categoria);
@@ -50,32 +51,36 @@ public class CategoriaControllerTestUnitaria {
         assertEquals(200, respuesta.getStatusCodeValue());
         assertEquals(categoria.getCategoria(), respuesta.getBody().getCategoria());
     }
+
     @Test
     public void testFindOneNoExistente() {
         when(categoriaService.findOne(2)).thenReturn(null);
         ResponseEntity<Categoria> respuesta = categoriaController.findOne(2);
         assertEquals(404, respuesta.getStatusCodeValue());
     }
+
     @Test
     public void testSave() {
         when(categoriaService.save(categoria)).thenReturn(categoria);
         ResponseEntity<Categoria> respuesta = categoriaController.save(categoria);
         assertEquals(200, respuesta.getStatusCodeValue());
-        assertEquals("Poesia2",  respuesta.getBody().getCategoria());
+        assertEquals("Poesia2", respuesta.getBody().getCategoria());
     }
+
     @Test
     public void testUpdateExistente() {
-        when(categoriaService.update(1,categoria)).thenReturn(categoria);
-        ResponseEntity<Categoria> respuesta = categoriaController.update(1,categoria);
+        when(categoriaService.update(1, categoria)).thenReturn(categoria);
+        ResponseEntity<Categoria> respuesta = categoriaController.update(1, categoria);
         assertEquals(200, respuesta.getStatusCodeValue());
     }
 
     @Test
     public void testUpdateNoExistente() {
         when(categoriaService.update(eq(2), any(Categoria.class))).thenReturn(null);
-        ResponseEntity<Categoria> respuesta = categoriaController.update(2,categoria);
+        ResponseEntity<Categoria> respuesta = categoriaController.update(2, categoria);
         assertEquals(200, respuesta.getStatusCodeValue());
     }
+
     @Test
     public void testDelete() {
         doNothing().when(categoriaService).delete(1);

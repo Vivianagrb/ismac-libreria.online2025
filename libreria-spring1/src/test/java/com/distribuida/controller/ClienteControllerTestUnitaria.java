@@ -44,6 +44,7 @@ public class ClienteControllerTestUnitaria {
         assertEquals(1, respuesta.getBody().size());
         verify(clienteService, times(1)).findAll();
     }
+
     @Test
     public void testFindOneExiste() {
         when(clienteService.findOne(1)).thenReturn(cliente);
@@ -51,32 +52,36 @@ public class ClienteControllerTestUnitaria {
         assertEquals(200, respuesta.getStatusCodeValue());
         assertEquals(cliente.getNombre(), respuesta.getBody().getNombre());
     }
+
     @Test
     public void testFindOneNoExistente() {
         when(clienteService.findOne(2)).thenReturn(null);
         ResponseEntity<Cliente> respuesta = clienteController.findOne(2);
         assertEquals(404, respuesta.getStatusCodeValue());
     }
+
     @Test
     public void testSave() {
         when(clienteService.save(cliente)).thenReturn(cliente);
         ResponseEntity<Cliente> respuesta = clienteController.save(cliente);
         assertEquals(200, respuesta.getStatusCodeValue());
-        assertEquals("Vivi",  respuesta.getBody().getNombre());
+        assertEquals("Vivi", respuesta.getBody().getNombre());
     }
+
     @Test
     public void testUpdateExistente() {
-         when(clienteService.update(1,cliente)).thenReturn(cliente);
-        ResponseEntity<Cliente> respuesta = clienteController.update(1,cliente);
+        when(clienteService.update(1, cliente)).thenReturn(cliente);
+        ResponseEntity<Cliente> respuesta = clienteController.update(1, cliente);
         assertEquals(200, respuesta.getStatusCodeValue());
     }
 
     @Test
     public void testUpdateNoExistente() {
         when(clienteService.update(eq(2), any(Cliente.class))).thenReturn(null);
-        ResponseEntity<Cliente> respuesta = clienteController.update(2,cliente);
+        ResponseEntity<Cliente> respuesta = clienteController.update(2, cliente);
         assertEquals(200, respuesta.getStatusCodeValue());
     }
+
     @Test
     public void testDelete() {
         doNothing().when(clienteService).delete(1);
@@ -85,6 +90,4 @@ public class ClienteControllerTestUnitaria {
         verify(clienteService, times(1)).delete(1);
 
     }
-
-
 }

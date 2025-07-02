@@ -52,6 +52,7 @@ public class CategoriaControllerTestintegracion {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.categoria").value("Poesia2"));
     }
+
     @Test
     public void testDeleteCategoria() throws Exception {
         mockMvc.perform(delete("/api/categoria/1"))

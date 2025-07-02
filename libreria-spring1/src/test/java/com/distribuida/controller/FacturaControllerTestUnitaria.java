@@ -50,6 +50,7 @@ public class FacturaControllerTestUnitaria {
         assertEquals(1, respuesta.getBody().size());
         verify(facturaService, times(1)).findAll();
     }
+
     @Test
     public void testFindOneExiste() {
         when(facturaService.findOne(1)).thenReturn(factura);
@@ -57,32 +58,36 @@ public class FacturaControllerTestUnitaria {
         assertEquals(200, respuesta.getStatusCodeValue());
         assertEquals(factura.getNum_factura(), respuesta.getBody().getNum_factura());
     }
+
     @Test
     public void testFindOneNoExistente() {
         when(facturaService.findOne(2)).thenReturn(null);
         ResponseEntity<Factura> respuesta = facturaController.findOne(2);
         assertEquals(404, respuesta.getStatusCodeValue());
     }
+
     @Test
     public void testSave() {
         when(facturaService.save(factura)).thenReturn(factura);
         ResponseEntity<Factura> respuesta = facturaController.save(factura);
         assertEquals(200, respuesta.getStatusCodeValue());
-        assertEquals("FAC-001",  respuesta.getBody().getNum_factura());
+        assertEquals("FAC-001", respuesta.getBody().getNum_factura());
     }
+
     @Test
     public void testUpdateExistente() {
-        when(facturaService.update(1,factura)).thenReturn(factura);
-        ResponseEntity<Factura> respuesta = facturaController.update(1,factura);
+        when(facturaService.update(1, factura)).thenReturn(factura);
+        ResponseEntity<Factura> respuesta = facturaController.update(1, factura);
         assertEquals(200, respuesta.getStatusCodeValue());
     }
 
     @Test
     public void testUpdateNoExistente() {
         when(facturaService.update(eq(2), any(Factura.class))).thenReturn(null);
-        ResponseEntity<Factura> respuesta = facturaController.update(2,factura);
+        ResponseEntity<Factura> respuesta = facturaController.update(2, factura);
         assertEquals(200, respuesta.getStatusCodeValue());
     }
+
     @Test
     public void testDelete() {
         doNothing().when(facturaService).delete(1);
