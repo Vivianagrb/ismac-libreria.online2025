@@ -102,15 +102,15 @@ public class FacturaServiceTestUnitaria {
         Factura factuaraNuevo= new Factura();
         when(facturaRepository.findById(999)).thenReturn(Optional.empty());
         Factura facturaResultado = facturaService.update(999,factuaraNuevo);
-        assertNotNull(facturaResultado);
-        verify(facturaRepository,never()).save(factura);
+        assertNull(facturaResultado);
+        verify(facturaRepository,times(0)).save(any());
     }
 
     @Test
     public void testDeleteExistente(){
         when(facturaRepository.existsById(1)).thenReturn(true);
         facturaService.delete(1);
-        verify(facturaService).delete(1);
+        verify(facturaRepository,times(1)).deleteById(1);
 
     }
 

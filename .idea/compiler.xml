@@ -14,9 +14,9 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="proyecto-libreria.libreria-spring1" options="-parameters" />
-      <module name="proyecto-libreria.libreria-spring1.main" options="-parameters" />
-      <module name="proyecto-libreria.libreria-spring1.test" options="-parameters" />
+      <module name="proyecto-libreria.libreria-spring1" options="-parameters -Xlint:deprecation" />
+      <module name="proyecto-libreria.libreria-spring1.main" options="-parameters -Xlint:deprecation" />
+      <module name="proyecto-libreria.libreria-spring1.test" options="-parameters -Xlint:deprecation" />
     </option>
   </component>
 </project>

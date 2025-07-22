@@ -33,13 +33,16 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<Cliente> save(@RequestBody Cliente cliente) {
         Cliente cliente1 = clienteService.save(cliente);
-        return ResponseEntity.ok(cliente);
+        return ResponseEntity.ok(cliente1);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> update(@PathVariable int id, @RequestBody Cliente cliente) {
         Cliente cliente1 = clienteService.update(id, cliente);
-        return ResponseEntity.ok(cliente);
+        if (cliente1 == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(cliente1);
     }
 
     @DeleteMapping("/{id}")
@@ -48,5 +51,7 @@ public class ClienteController {
         return ResponseEntity.noContent().build();
     }
 
-}
 
+
+
+}

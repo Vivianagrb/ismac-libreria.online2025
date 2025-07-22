@@ -70,3 +70,7 @@ jacocoTestReport {
 springBoot {
 	mainClass = 'com.distribuida.LibreriaSpring1Application'
 }
+
+tasks.withType(JavaCompile).configureEach {
+	options.compilerArgs << "-Xlint:deprecation"
+}
