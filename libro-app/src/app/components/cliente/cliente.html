@@ -137,8 +137,8 @@
                 </td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="mostrarColumas"></tr>
-            <tr mat-row *matRowDef="let row; columns: mostrarColumas;"></tr>
+            <tr mat-header-row *matHeaderRowDef="mostrarColumnas"></tr>
+            <tr mat-row *matRowDef="let row; columns: mostrarColumnas;"></tr>
         </table>
 
         <mat-paginator [pageSizeOptions]="[5, 12, 25]" showFirstLastButtons></mat-paginator>

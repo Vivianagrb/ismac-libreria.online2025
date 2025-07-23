@@ -2,7 +2,7 @@ import {
   RtlScrollAxisType,
   getRtlScrollAxisType,
   supportsScrollBehavior
-} from "./chunk-7XBN5CAY.js";
+} from "./chunk-Q7MFJGMB.js";
 import {
   BidiModule,
   Directionality
@@ -1952,4 +1952,4 @@ export {
   _DisposeViewRepeaterStrategy,
   SelectionModel
 };
-//# sourceMappingURL=chunk-V5ITFMIM.js.map
+//# sourceMappingURL=chunk-HHTX7M57.js.map

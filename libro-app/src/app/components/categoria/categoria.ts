@@ -1,43 +1,47 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Cliente } from '../../model/cliente.model';
+import { Categoria } from '../../model/categoria.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ClienteService } from '../../services/cliente';
+import { CategoriaService } from '../../services/categoria';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 
-@Component({
-  selector: 'app-cliente',
-  standalone: false,
-  templateUrl: './cliente.html',
-  styleUrls: ['./cliente.css']  
-})
-export class ClienteComponent implements OnInit {
 
-  clientes: Cliente[] = [];
-  cliente: Cliente = {} as Cliente;
+
+@Component({
+  selector: 'app-categoria',
+  standalone: false,
+  templateUrl: './categoria.html',
+  styleUrl: './categoria.css'
+})
+export class CategoriaComponent implements OnInit {
+
+  categorias: Categoria[] = [];
+  categoria: Categoria = {} as Categoria;
   editar: boolean = false;
   idEditar: number | null = null;
 
-  dataSource!: MatTableDataSource<Cliente>;
-  mostrarColumnas: string[] = ['idCliente', 'cedula', 'nombre', 'apellido', 'direccion', 'telefono', 'correo', 'acciones'];
+  dataSource!: MatTableDataSource<Categoria>;
+  mostrarColumnas: string[] = ['id_categoria', 'categoria', 'descripcion', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild('formularioCliente', { static: false })
-formularioCliente!: ElementRef; 
+  @ViewChild('formularioCategoria', { static: false })
+formularioCategoria!: ElementRef;
 
-  constructor(private clienteService: ClienteService) { }
- 
+  constructor(private categoriaService: CategoriaService) { }
+
 
   ngOnInit(): void {
-    this.findAll(); 
+    this.findAll();
   }
 
+
+
 findAll(): void {
-  this.clienteService.findAll().subscribe((data: Cliente[]) => {
-    this.dataSource = new MatTableDataSource<Cliente>(data);
+  this.categoriaService.findAll().subscribe((data: Categoria[]) => {
+    this.dataSource = new MatTableDataSource<Categoria>(data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   });
@@ -46,16 +50,17 @@ findAll(): void {
 
 
   save(): void {
-    this.clienteService.save(this.cliente).subscribe(() => {
-      this.cliente = {} as Cliente;
+    this.categoriaService.save(this.categoria).subscribe(() => {
+      this.categoria = {} as Categoria;
       this.findAll();
     });
   }
 
+
   update(): void {
     if (this.idEditar !== null) {
-      this.clienteService.update(this.idEditar, this.cliente).subscribe(() => {
-        this.cliente = {} as Cliente;
+      this.categoriaService.update(this.idEditar, this.categoria).subscribe(() => {
+        this.categoria = {} as Categoria;
         this.editar = false;
         this.idEditar = null;
         this.findAll();
@@ -75,46 +80,46 @@ findAll(): void {
       cancelButtonColor: '#3085d6'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.clienteService.delete(this.cliente.idCliente).subscribe(() => {
+        this.categoriaService.delete(this.categoria.id_categoria).subscribe(() => {
           this.findAll();
-          this.cliente = {} as Cliente;
-          Swal.fire('Eliminado', 'El cliente ha sido eliminado', 'success');
+          this.categoria = {} as Categoria;
+          Swal.fire('Eliminado', 'La categoria ha sido eliminado', 'success');
         });
       } else {
-        this.cliente = {} as Cliente;
+        this.categoria = {} as Categoria;
       }
     });
   }
 
-  editarCliente(cliente: Cliente): void {
-    this.cliente = { ...cliente };
-    this.idEditar = cliente.idCliente;
+  editarCategoria(categoria: Categoria): void {
+    this.categoria = { ...categoria };
+    this.idEditar = categoria.id_categoria;
     this.editar = true;
 
     setTimeout(() => {
-      this.formularioCliente.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+      this.formularioCategoria.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     }, 100);
   }
 
-  editarClienteCancelar(form: NgForm): void {
-    this.cliente = {} as Cliente;
+  editarCategoriaCancelar(form: NgForm): void {
+    this.categoria = {} as Categoria;
     this.idEditar = null;
     this.editar = false;
     form.resetForm();
   }
 
-  guardarCliente(form: NgForm): void {
+  guardarCategoria(form: NgForm): void {
     if (this.editar && this.idEditar !== null) {
       this.update();
       form.resetForm();
     } else {
       this.save();
-      form.resetForm(); 
+      form.resetForm();
     }
   }
 
-  buscarCliente(event: Event){
+  buscarCategoria(event: Event){
     const filtro = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filtro.trim().toLowerCase();
   }

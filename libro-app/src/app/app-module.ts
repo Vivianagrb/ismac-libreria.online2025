@@ -4,6 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { ClienteComponent } from './components/cliente/cliente';
+import { AutorComponent } from './components/autor/autor';
+import { CategoriaComponent } from './components/categoria/categoria';
+
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
@@ -18,10 +21,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
+
 @NgModule({
   declarations: [
     App,
-    ClienteComponent
+    ClienteComponent,
+    AutorComponent,
+    CategoriaComponent
   ],
   imports: [
     BrowserModule,
