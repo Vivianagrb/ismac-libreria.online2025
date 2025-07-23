@@ -49,8 +49,8 @@ public class CategoriaRepositoryTestIt {
 
     @Test
     public void update() {
-        Optional<Categoria> categoria = categoriaRepository.findById(51);
-        assertTrue(categoria.isPresent(), "La categoría  51 debería existir.");
+        Optional<Categoria> categoria = categoriaRepository.findById(60);
+        assertTrue(categoria.isPresent(), "La categoría  60 debería existir.");
         Categoria existente = categoria.get();
         existente.setCategoria("Comedia 2");
         existente.setDescripcion("En esta categoría están comedias importantes 2");
