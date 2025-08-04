@@ -7,8 +7,6 @@ import { CategoriaService } from '../../services/categoria';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-categoria',
   standalone: false,
@@ -28,26 +26,21 @@ export class CategoriaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild('formularioCategoria', { static: false })
-formularioCategoria!: ElementRef;
+  formularioCategoria!: ElementRef;
 
   constructor(private categoriaService: CategoriaService) { }
-
 
   ngOnInit(): void {
     this.findAll();
   }
 
-
-
-findAll(): void {
-  this.categoriaService.findAll().subscribe((data: Categoria[]) => {
-    this.dataSource = new MatTableDataSource<Categoria>(data);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  });
-}
-
-
+ findAll(): void {
+    this.categoriaService.findAll().subscribe((data: Categoria[]) => {
+      this.dataSource = new MatTableDataSource<Categoria>(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
 
   save(): void {
     this.categoriaService.save(this.categoria).subscribe(() => {
@@ -55,7 +48,6 @@ findAll(): void {
       this.findAll();
     });
   }
-
 
   update(): void {
     if (this.idEditar !== null) {
@@ -119,7 +111,7 @@ findAll(): void {
     }
   }
 
-  buscarCategoria(event: Event){
+  buscarCategoria(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filtro.trim().toLowerCase();
   }

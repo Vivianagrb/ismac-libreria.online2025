@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
   selector: 'app-cliente',
   standalone: false,
   templateUrl: './cliente.html',
-  styleUrls: ['./cliente.css']  
+  styleUrls: ['./cliente.css']
 })
 export class ClienteComponent implements OnInit {
 
@@ -26,22 +26,23 @@ export class ClienteComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild('formularioCliente', { static: false })
-formularioCliente!: ElementRef; 
+  formularioCliente!: ElementRef;
 
   constructor(private clienteService: ClienteService) { }
- 
+
 
   ngOnInit(): void {
-    this.findAll(); 
+    this.findAll();
   }
 
-findAll(): void {
-  this.clienteService.findAll().subscribe((data: Cliente[]) => {
-    this.dataSource = new MatTableDataSource<Cliente>(data);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  });
-}
+  findAll(): void {
+    this.clienteService.findAll().subscribe((data: Cliente[]) => {
+      console.log("Libro:", data)
+      this.dataSource = new MatTableDataSource<Cliente>(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
 
 
 
@@ -92,7 +93,7 @@ findAll(): void {
     this.editar = true;
 
     setTimeout(() => {
-      this.formularioCliente.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+      this.formularioCliente.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     }, 100);
   }
@@ -110,11 +111,11 @@ findAll(): void {
       form.resetForm();
     } else {
       this.save();
-      form.resetForm(); 
+      form.resetForm();
     }
   }
 
-  buscarCliente(event: Event){
+  buscarCliente(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filtro.trim().toLowerCase();
   }

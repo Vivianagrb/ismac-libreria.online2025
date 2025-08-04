@@ -9,7 +9,7 @@ import { Autor } from '../model/autor.model';
 export class AutorService {
   private baseURL = 'http://localhost:8080/api/autor';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   findAll(): Observable<Autor[]> {
     return this.http.get<Autor[]>(this.baseURL);

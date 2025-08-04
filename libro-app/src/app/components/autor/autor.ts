@@ -7,7 +7,6 @@ import { AutorService } from '../../services/autor';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 
-
 @Component({
   selector: 'app-autor',
   standalone: false,
@@ -31,7 +30,6 @@ export class AutorComponent implements OnInit {
 
   constructor(private autorService: AutorService) { }
 
-
   ngOnInit(): void {
     this.findAll();
   }
@@ -43,8 +41,6 @@ export class AutorComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
-
-
 
   save(): void {
     this.autorService.save(this.autor).subscribe(() => {
