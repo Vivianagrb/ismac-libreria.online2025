@@ -16,4 +16,13 @@ public interface CarritoService {
     void clearByToken(String token);
     Carrito getByToken(String token);
 
+    Object findAll();
+
+    Object findOne(int i);
+
+    Object save(Carrito carrito);
+
+    Object update(int i, Carrito carrito);
+
+    void delete(int i);
 }

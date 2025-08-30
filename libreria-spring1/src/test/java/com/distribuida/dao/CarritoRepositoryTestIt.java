@@ -55,16 +55,16 @@ public class CarritoRepositoryTestIt {
 
         Carrito carrito = new Carrito();
         carrito.setCliente(cliente);
-        carrito.setToken("c3");
+        carrito.setToken("c4");
         carrito.setSubtotal(BigDecimal.valueOf(100.00));
-        carrito.setDescuento(BigDecimal.valueOf(10.00)); // corregido
-        carrito.setImpuesto(BigDecimal.valueOf(12.00));  // corregido
-        carrito.setTotal(BigDecimal.valueOf(102.00));    // corregido
+        carrito.setDescuento(BigDecimal.valueOf(10.00));
+        carrito.setImpuesto(BigDecimal.valueOf(12.00));
+        carrito.setTotal(BigDecimal.valueOf(102.00));
         carrito.setActualizadoEn(LocalDateTime.now());
 
         Carrito carritoGuardado = carritoRepository.save(carrito);
         assertNotNull(carritoGuardado);
-        assertEquals("c3", carritoGuardado.getToken());
+        assertEquals("c4", carritoGuardado.getToken("001"));
         assertEquals(BigDecimal.valueOf(102.00), carritoGuardado.getTotal());
     }
 
@@ -83,7 +83,7 @@ public class CarritoRepositoryTestIt {
 
         Carrito carritoActualizado = carritoRepository.save(carrito);
         assertNotNull(carritoActualizado);
-        assertEquals("c11", carritoActualizado.getToken());
+        assertEquals("c11", carritoActualizado.getToken("001"));
         assertEquals(BigDecimal.valueOf(153.00), carritoActualizado.getTotal());
     }
 }

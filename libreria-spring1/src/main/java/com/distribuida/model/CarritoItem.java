@@ -17,6 +17,7 @@ public class CarritoItem {
     @Column(name = "id_carrito_item")
     private Long idCarritoItem;
 
+    @JsonIgnoreProperties
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_carrito")
     private Carrito carrito;
@@ -35,19 +36,20 @@ public class CarritoItem {
     @Column(name = "total", precision = 12, scale = 2)
     private BigDecimal total;
 
-    @PrePersist @PreUpdate
-    public void jpaCalcTotal(){
+    @PrePersist
+    @PreUpdate
+    public void jpaCalcTotal() {
         calcTotal();
-        if (precioUnitario==null) precioUnitario= BigDecimal.ZERO;
-        if (cantidad==null) cantidad=0;
-        total= precioUnitario.multiply(BigDecimal.valueOf(cantidad))
+
+    }
+
+    public void calcTotal() {
+        if (precioUnitario == null) precioUnitario = BigDecimal.ZERO;
+        if (cantidad == null) cantidad = 0;
+        total = precioUnitario.multiply(BigDecimal.valueOf(cantidad))
                 .setScale(2, RoundingMode.HALF_UP);
-
     }
 
-    public void calcTotal(){
-
-    }
     // Getters y Setters
     public Long getIdCarritoItem() {
         return idCarritoItem;

@@ -20,7 +20,7 @@ public class Carrito {
     @Column(name = "id_carrito")
     private Long idCarrito;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
@@ -43,7 +43,7 @@ public class Carrito {
     @Column(name = "total", precision = 12, scale = 2)
     private BigDecimal total = BigDecimal.ZERO;
 
-    @Column(name = "actualizado_en")
+    @Column(name = "actualizado_en", nullable = false, insertable = false, updatable = false)
     private LocalDateTime actualizadoEn;
 
     public void recomputarTotales(BigDecimal tasaIva) {
@@ -70,6 +70,8 @@ public class Carrito {
         if (total == null) total = BigDecimal.ZERO;
         if (descuento == null) descuento = BigDecimal.ZERO;
         if (impuesto == null) impuesto = BigDecimal.ZERO;
+        if (total == null) total = BigDecimal.ZERO;
+
     }
 
     // Getters y Setters
@@ -77,48 +79,29 @@ public class Carrito {
         return idCarrito;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public List<CarritoItem> getItems() {
-        return items;
-    }
-
-    public BigDecimal getSubtotal() {
-        return subtotal;
-    }
-
-    public BigDecimal getDescuento() {
-        return descuento;
-    }
-
-    public BigDecimal getImpuesto() {
-        return impuesto;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public LocalDateTime getActualizadoEn() {
-        return actualizadoEn;
-    }
-
     public void setIdCarrito(Long idCarrito) {
         this.idCarrito = idCarrito;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
+    public String getToken(String number) {
+        return token;
+    }
+
     public void setToken(String token) {
         this.token = token;
+    }
+
+
+    public List<CarritoItem> getItems() {
+        return items;
     }
 
     public void setItems(List<CarritoItem> items) {
@@ -129,19 +112,47 @@ public class Carrito {
         this.subtotal = subtotal;
     }
 
+    public BigDecimal getSubtotal() {
+        return subtotal;
+    }
+
+
+    public BigDecimal getDescuento() {
+        return descuento;
+    }
+
     public void setDescuento(BigDecimal descuento) {
         this.descuento = descuento;
+    }
+
+    public BigDecimal getImpuesto() {
+        return impuesto;
     }
 
     public void setImpuesto(BigDecimal impuesto) {
         this.impuesto = impuesto;
     }
 
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
     public void setTotal(BigDecimal total) {
         this.total = total;
     }
 
+    public LocalDateTime getActualizadoEn() {
+        return actualizadoEn;
+    }
+
     public void setActualizadoEn(LocalDateTime actualizadoEn) {
-        this.actualizadoEn = actualizadoEn;
+
+    }
+
+    public int getStatusCodeValue() {
+    }
+
+    public Carrito getBody() {
     }
 }
