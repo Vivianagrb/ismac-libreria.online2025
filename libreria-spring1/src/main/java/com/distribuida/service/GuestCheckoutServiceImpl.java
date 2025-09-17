@@ -6,6 +6,7 @@ import com.distribuida.dao.FacturaRepository;
 import com.distribuida.dao.LibroRepository;
 import com.distribuida.model.Factura;
 import com.distribuida.service.util.CheckoutMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,6 +34,7 @@ public class GuestCheckoutServiceImpl implements GuestCheckoutservice{
     }
 
     @Override
+    @Transactional
     public Factura checkoutByToken(String token) {
 
     var carrito =carritoRepository.findByToken (token)

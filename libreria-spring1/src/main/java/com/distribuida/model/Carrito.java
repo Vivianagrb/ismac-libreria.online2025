@@ -12,7 +12,7 @@ import java.util.List;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name = "id_carrito")
+@Table(name = "icarrito")
 public class Carrito {
 
     @Id
@@ -150,9 +150,5 @@ public class Carrito {
 
     }
 
-    public int getStatusCodeValue() {
-    }
 
-    public Carrito getBody() {
-    }
 }

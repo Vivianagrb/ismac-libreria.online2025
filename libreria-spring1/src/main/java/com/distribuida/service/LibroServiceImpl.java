@@ -51,6 +51,8 @@ public  class LibroServiceImpl implements LibroService {
         libroExistente.setPortada(libro.getPortada());
         libroExistente.setPresentacion(libro.getPresentacion());
         libroExistente.setPrecio(libro.getPrecio());
+        libroExistente.setCategoria(libro.getCategoria());
+        libroExistente.setAutor(libro.getAutor());
         return libroRepository.save(libroExistente);
     }
 
