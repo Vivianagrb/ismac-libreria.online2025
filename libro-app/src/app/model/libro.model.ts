@@ -20,5 +20,4 @@ export interface Libro {
     autor: Autor
     [key: string]: any;
     
-
 }

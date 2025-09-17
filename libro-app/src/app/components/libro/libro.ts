@@ -12,7 +12,6 @@ import { AutorService } from '../../services/autor';
 import { CategoriaService } from '../../services/categoria';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Block } from '@angular/compiler';
 
 
 @Component({
@@ -40,7 +39,7 @@ export class LibroComponent implements OnInit {
   ];
 
   @ViewChild('formularioLibro', { static: false }) formularioLibro!: ElementRef;
- // @ViewChild(MatPaginator) paginator!: MatPaginator;
+  // @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
